@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  transition: background 0.3s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+}
+
+.rotating-image {
+  transition: transform 0.2s;
+}
+
+.rotating-image:hover {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.tooltip-text {
+  display: none; /* Hide the tooltip text */
+}
+
+.sphere {
+  position: relative;
+  width: 150px; /* Adjust size as needed */
+  height: 150px; /* Adjust size as needed */
+  background: #b5c9da; /* Even lighter blue-gray color */
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* Ensure overflow is visible to show shadow */
+  animation: bounce 2s infinite ease-in-out; /* Smoother easing for the bounce */
+}
+
+.sphere img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+.sphere::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; /* Shorten the distance between shadow and sphere */
+  left: 20%; /* Move shadow to the left */
+  transform: translateX(-50%);
+  width: 60%; /* Narrow the shadow */
+  height: 6px; /* Shorten the shadow height */
+  background: rgba(0, 0, 0, 0.4); /* Darker shadow when visible */
+  border-radius: 50%;
+  z-index: -1;
+  animation: shadowBounce 2s infinite ease-in-out; /* Matched shadow bounce easing */
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* Peak of the bounce */
+  }
+}
+
+@keyframes shadowBounce {
+  0%, 100% {
+    transform: scale(.8);
+    filter: blur(3px); /* Less blur when the shadow is at the bottom */
+  }
+  50% {
+    transform: scale(1.2); /* Peak of the shadow bounce */
+    filter: blur(10px); /* Increase blur at the peak of the bounce */
+    background: rgba(0, 0, 0, 0.2); /* Lighter shadow when blurred */
+  }
+}
